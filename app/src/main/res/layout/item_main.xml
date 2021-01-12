@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="@dimen/pet_card_elevation"
+    app:cardCornerRadius="@dimen/pet_card_radius"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="@dimen/global_margin"
+    android:layout_width="@dimen/pet_card_width"
+    android:layout_height="@dimen/pet_card_height">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPet"
+            tools:src="@tools:sample/avatars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:elevation="@dimen/pet_bottom_bar_elevation"
+            android:padding="@dimen/global_margin"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivLess"
+                android:src="@mipmap/white_dog_bone_100"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="@dimen/pet_bones_size"
+                android:layout_height="@dimen/pet_bones_size"/>
+            <TextView
+                android:id="@+id/tvPetName"
+                tools:text="@tools:sample/full_names"
+                android:textStyle="bold"
+                android:paddingLeft="8dp"
+                app:layout_constraintStart_toEndOf="@id/ivLess"
+                app:layout_constraintEnd_toStartOf="@+id/tvRating"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/ivPlus"
+                android:src="@mipmap/yellow_dog_bone_100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="@dimen/pet_bones_size"
+                android:layout_height="@dimen/pet_bones_size"/>
+            <TextView
+                android:id="@+id/tvRating"
+                tools:text="@tools:sample/us_zipcodes"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/ivPlus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

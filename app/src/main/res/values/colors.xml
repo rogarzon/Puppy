@@ -11,5 +11,5 @@
     <color name="primaryColor">#795548</color>
     <color name="primaryDarkColor">#5D4037</color>
     <color name="accentColor">#FF5722</color>
-    <color name="insideColor">#E3C87B</color>
+    <color name="tintColor">#E3C87B</color>
 </resources>
