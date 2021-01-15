@@ -1,4 +1,4 @@
-package com.example.puppy;
+package com.example.puppy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.puppy.R;
 import com.example.puppy.apdapter.PetAdapter;
 import com.example.puppy.data.Pet;
 

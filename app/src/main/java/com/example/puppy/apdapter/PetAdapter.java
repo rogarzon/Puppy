@@ -22,6 +22,7 @@ import java.util.List;
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     private List<Pet> pets;
     private Context context;
+    private OnPetClickListener petClickListener;
 
     public PetAdapter(Context context) {
         this.context = context;
@@ -60,6 +61,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         notifyDataSetChanged();
     }
 
+    public void setPetClickListener(OnPetClickListener listener){
+        this.petClickListener = listener;
+    }
+
     public class PetHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView ivPet;
         private ImageView ivLess;
@@ -76,6 +81,14 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
             tvRating = itemView.findViewById(R.id.tvRating);
             ivLess.setOnClickListener(this);
             ivPlus.setOnClickListener(this);
+
+            itemView.setOnClickListener(v -> {
+                if (petClickListener != null){
+                    int position = getAdapterPosition();
+                    Pet p = pets.get(position);
+                    petClickListener.onPetClick(p);
+                }
+            });
         }
 
         public void bind(Pet pet) {
@@ -112,5 +125,9 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
                         Snackbar.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public interface OnPetClickListener {
+        void onPetClick(Pet pet);
     }
 }

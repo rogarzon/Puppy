@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FavoriteActivity">
+    tools:context=".activities.BioActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/app_bar_elevation"
-        android:theme="@style/Theme.Puppy.AppBarOverlay">
+        android:theme="@style/Theme.Puppy.AppBarOverlay"
+        app:elevation="@dimen/app_bar_elevation">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tbFavorite"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/Theme.Puppy.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_favorite"/>
+    <include
+        layout="@layout/content_bio" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

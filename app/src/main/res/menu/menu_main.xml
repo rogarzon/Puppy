@@ -6,4 +6,12 @@
         android:id="@+id/action_start"
         app:showAsAction="always"
         android:icon="@drawable/ic_star"/>
+    <item
+        android:id="@+id/action_contact"
+        android:orderInCategory="100"
+        android:title="@string/contact_title"/>
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="110"
+        android:title="@string/about_title"/>
 </menu>
