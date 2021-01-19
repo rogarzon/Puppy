@@ -17,7 +17,10 @@ import android.widget.Toast;
 import com.example.puppy.R;
 import com.example.puppy.apdapter.PetAdapter;
 import com.example.puppy.data.Pet;
+import com.example.puppy.presenter.IPetPresenter;
+import com.example.puppy.presenter.PetPresenter;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,11 +28,12 @@ import java.util.Random;
  * Use the {@link PetListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PetListFragment extends Fragment implements PetAdapter.OnPetClickListener {
+public class PetListFragment extends Fragment implements IPetPresenter, PetAdapter.OnPetClickListener {
     private RecyclerView rvPets;
     private PetAdapter petAdapter;
     private SwipeRefreshLayout refreshLayout;
     private OnPetListEvents petListEvents;
+    private PetPresenter petPresenter;
 
     public PetListFragment() {
         // Required empty public constructor
@@ -55,6 +59,8 @@ public class PetListFragment extends Fragment implements PetAdapter.OnPetClickLi
         refreshLayout = v.findViewById(R.id.srl);
         setUpRecyclerView(v);
 
+        petPresenter = new PetPresenter(getContext(), this);
+
         return v;
     }
 
@@ -63,25 +69,6 @@ public class PetListFragment extends Fragment implements PetAdapter.OnPetClickLi
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,
                 false);
         rvPets.setLayoutManager(manager);
-        populateAdapter();
-
-        rvPets.setAdapter(petAdapter);
-    }
-
-    private void populateAdapter() {
-        petAdapter = new PetAdapter(getActivity());
-        Random random = new Random();
-        int bound = 6;
-
-        petAdapter.add(new Pet("Butch", R.drawable.butch, random.nextInt(bound)));
-        petAdapter.add(new Pet("Hannah", R.drawable.hannah, random.nextInt(bound)));
-        petAdapter.add(new Pet("Jamie", R.drawable.jamie, random.nextInt(bound)));
-        petAdapter.add(new Pet("Jingles", R.drawable.jingles, random.nextInt(bound)));
-        petAdapter.add(new Pet("Joe", R.drawable.joe, random.nextInt(bound)));
-        petAdapter.add(new Pet("Marliese", R.drawable.marliese, random.nextInt(bound)));
-        petAdapter.add(new Pet("Snoopy", R.drawable.snoopy, random.nextInt(bound)));
-        petAdapter.add(new Pet("Tom", R.drawable.tom, random.nextInt(bound)));
-        petAdapter.setPetClickListener(this);
     }
 
     @Override
@@ -92,20 +79,65 @@ public class PetListFragment extends Fragment implements PetAdapter.OnPetClickLi
     }
 
     @Override
+    public void onPetRated(Pet pet, int rate) {
+        petPresenter.updatePetRate(pet, rate);
+    }
+
+    @Override
+    public PetAdapter createPetAdapter(@NonNull List<Pet> pets) {
+        petAdapter = new PetAdapter(getContext());
+        petAdapter.addAll(pets);
+        return petAdapter;
+    }
+
+    @Override
+    public void setPetAdapter(PetAdapter adapter) {
+        rvPets.setAdapter(adapter);
+        adapter.setPetClickListener(this);
+    }
+
+    @Override
+    public void presentPetRate(Pet pet) {
+        Pet p = petAdapter.get(pet);
+
+        if (p != null) {
+            p.setRating(pet.getRating());
+            petAdapter.notifyDataSetChanged();
+        }
+    }
+
+    void populatePets() {
+        petPresenter.populatePets();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
+
         refreshLayout.setOnRefreshListener(() -> {
-            populateAdapter();
+            populatePets();
             refreshLayout.setRefreshing(false);
         });
-        petAdapter.setPetClickListener(this);
+
+        if (petAdapter != null) {
+            petAdapter.setPetClickListener(this);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        populatePets();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         refreshLayout.setOnRefreshListener(null);
-        petAdapter.setPetClickListener(null);
+
+        if (petAdapter != null) {
+            petAdapter.setPetClickListener(null);
+        }
     }
 
     @Override

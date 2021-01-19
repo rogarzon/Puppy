@@ -52,8 +52,20 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     }
 
     public void addAll(Collection<Pet> pets) {
-        pets.addAll(pets);
+        this.pets.addAll(pets);
         notifyDataSetChanged();
+    }
+
+    public Pet get(Pet pet) {
+        for (int i = 0; i < this.pets.size(); i++) {
+            Pet p = this.pets.get(i);
+
+            if (p.getId() == pet.getId()){
+                return p;
+            }
+        }
+
+        return null;
     }
 
     public void clear() {
@@ -115,8 +127,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
             }
 
             if (rate >= 0 && rate <= 5) {
-                pet.setRating(rate);
                 notifyDataSetChanged();
+                if (petClickListener != null) {
+                    petClickListener.onPetRated(pet, rate);
+                }
             } else if (rate < 0) {
                 Snackbar.make(v, context.getResources().getString(R.string.less_zero_rating),
                         Snackbar.LENGTH_SHORT).show();
@@ -129,5 +143,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
 
     public interface OnPetClickListener {
         void onPetClick(Pet pet);
+        void onPetRated(Pet pet, int rate);
     }
 }

@@ -12,6 +12,8 @@
     <string name="contact_email_text_hint">Enter email text</string>
     <string name="send_button_text">Send</string>
 
+    <string name="favorite_activity_title">Favorite</string>
+
     <string name="bio_activity_title">My Bio</string>
     <string name="bio_text">"I'am a programmer that love develop apps"</string>
     <!-- TODO: Remove or change this placeholder text -->
