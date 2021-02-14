@@ -4,6 +4,7 @@ public class Pet {
     private long id;
     private String name;
     private int image;
+    private String imageUrl;
     private int rating;
 
     public Pet(String name, int image, int rating) {
@@ -42,5 +43,13 @@ public class Pet {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

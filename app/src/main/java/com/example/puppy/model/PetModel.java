@@ -4,14 +4,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.puppy.api.ApiConstants;
+import com.example.puppy.api.ApiEndpoint;
+import com.example.puppy.api.ApiService;
+import com.example.puppy.api.model.PetResponse;
 import com.example.puppy.data.Pet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PetModel {
     private final String[] PET_FIELDS = {
@@ -72,7 +81,19 @@ public class PetModel {
     }
 
     public void getPets() {
-        this.presenter.setPets(getPets(false));
+        ApiEndpoint endpoint = ApiService.getInstance(ApiConstants.URL_ROOT);
+        endpoint.getMediaContent().enqueue(new Callback<PetResponse>() {
+            @Override
+            public void onResponse(Call<PetResponse> call, Response<PetResponse> response) {
+                PetResponse result = response.body();
+                presenter.setPets(result.getPets());
+            }
+
+            @Override
+            public void onFailure(Call<PetResponse> call, Throwable t) {
+                Log.e("NETWORK_ERROR", t.getMessage());
+            }
+        });
     }
 
     public void getFavoritePets() {

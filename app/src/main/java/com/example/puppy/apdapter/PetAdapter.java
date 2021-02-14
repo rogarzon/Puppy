@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.puppy.R;
 import com.example.puppy.data.Pet;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -104,7 +105,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         }
 
         public void bind(Pet pet) {
-            ivPet.setImageResource(pet.getImage());
+            Picasso.get()
+                    .load(pet.getImageUrl())
+                    .placeholder(R.drawable.ic_no_picture)
+                    .into(ivPet);
             tvName.setText(pet.getName());
             tvRating.setText(String.valueOf(pet.getRating()));
         }
