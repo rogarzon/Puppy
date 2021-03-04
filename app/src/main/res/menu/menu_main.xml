@@ -14,4 +14,7 @@
         android:id="@+id/action_about"
         android:orderInCategory="110"
         android:title="@string/about_title"/>
+    <item android:id="@+id/action_register"
+        android:orderInCategory="120"
+        android:title="@string/action_register"/>
 </menu>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "137364017303",
+    "project_id": "puppy-e89c7",
+    "storage_bucket": "puppy-e89c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137364017303:android:1af16ae5fa4ddbb22119d2",
+        "android_client_info": {
+          "package_name": "com.example.puppy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137364017303-pcd5run7v19anf1m5fqv7tqeieia43rq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.puppy",
+            "certificate_hash": "deb7736814bfcec52de24315ac9536fd3cf291a7"
+          }
+        },
+        {
+          "client_id": "137364017303-i8qcp8hhcu4d7qq1fvg4jaj00onr8etg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYKmuzdtQA4E2Xkd5r4lzBJRezlB5gR2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137364017303-i8qcp8hhcu4d7qq1fvg4jaj00onr8etg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

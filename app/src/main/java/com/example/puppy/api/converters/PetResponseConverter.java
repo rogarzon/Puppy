@@ -37,6 +37,7 @@ public class PetResponseConverter implements JsonDeserializer<PetResponse> {
 
             Pet p = new Pet("", 0, 0);
             p.setImageUrl(imageUrl);
+            p.setName(id);
             pets.add(p);
         }
 

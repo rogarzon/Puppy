@@ -2,6 +2,7 @@ package com.example.puppy.api;
 
 import com.example.puppy.api.converters.PetResponseConverter;
 import com.example.puppy.api.model.PetResponse;
+import com.example.puppy.api.model.UserResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,12 +14,17 @@ public class RetrofitClient {
 
     public static Retrofit getInstance(String baseUrl) {
         if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create(createConverter()))
-                    .build();
+            retrofit = newInstance(baseUrl);
         }
         return retrofit;
+    }
+
+    public static Retrofit newInstance(String baseUrl) {
+        return new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create(createConverter()))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     private static Gson createConverter() {

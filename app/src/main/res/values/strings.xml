@@ -16,6 +16,12 @@
 
     <string name="bio_activity_title">My Bio</string>
     <string name="bio_text">"I'am a programmer that love develop apps"</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_register">Receive Notifications</string>
+    <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>
+    <string name="fcm_message">FCM Message</string>
 </resources>
