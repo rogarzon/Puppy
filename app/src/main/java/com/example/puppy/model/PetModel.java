@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,8 +13,11 @@ import androidx.annotation.Nullable;
 import com.example.puppy.api.ApiConstants;
 import com.example.puppy.api.ApiEndpoint;
 import com.example.puppy.api.ApiService;
+import com.example.puppy.api.RetrofitClient;
 import com.example.puppy.api.model.PetResponse;
+import com.example.puppy.api.model.UserResponse;
 import com.example.puppy.data.Pet;
+import com.example.puppy.util.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,9 +105,28 @@ public class PetModel {
     }
 
     public void updatePetRate(Pet pet, int rate) {
-        if(ratePet(pet, rate) > 0){
+        /*if(ratePet(pet, rate) > 0){
             pet.setRating(rate);
             this.presenter.setPetRate(pet);
-        }
+        }*/
+        String token = Preferences.getInstance(context).getToken();
+
+        RetrofitClient.newInstance(ApiConstants.SERVER_URL)
+                .create(ApiEndpoint.class)
+                .registerLikesImage(token, pet.getName(), pet.getImageUrl())
+                .enqueue(new Callback<UserResponse>() {
+                    @Override
+                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                        UserResponse userRes = response.body();
+                        pet.setRating(rate);
+                        presenter.setPetRate(pet);
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserResponse> call, Throwable t) {
+                        Toast.makeText(context, "NETWORK ERROR: " + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

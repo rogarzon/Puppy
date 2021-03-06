@@ -22,6 +22,7 @@ import com.example.puppy.api.model.UserResponse;
 import com.example.puppy.data.Pet;
 import com.example.puppy.fragments.PetListFragment;
 import com.example.puppy.fragments.PetProfileFragment;
+import com.example.puppy.util.Preferences;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements PetListFragment.O
                     Log.d(TAG, msg);
 
                     registerToken(token);
+                    Preferences.getInstance(getApplicationContext())
+                            .setToken(token);
                 });
     }
 

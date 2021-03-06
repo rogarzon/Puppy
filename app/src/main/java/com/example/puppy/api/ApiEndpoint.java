@@ -19,4 +19,10 @@ public interface ApiEndpoint {
     Call<UserResponse> registerTokenID(@Field("token") String token,
                                        @Field("user_id") String user_id);
 
+    @FormUrlEncoded
+    @POST(ApiConstants.KEY_POST_LIKES_IMAGE)
+    Call<UserResponse> registerLikesImage(@Field("token") String token,
+                                          @Field("user_id") String userId,
+                                          @Field("image_id") String imageId);
+
 }

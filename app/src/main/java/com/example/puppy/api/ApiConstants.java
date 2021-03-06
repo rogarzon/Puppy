@@ -13,5 +13,6 @@ public class ApiConstants {
     //Firebase
     public static final String SERVER_URL = "https://protected-refuge-34893.herokuapp.com/";
     public static final String KEY_POST_ID_TOKEN = "token-device/";
+    public static final String KEY_POST_LIKES_IMAGE = "likes-image/";
 
 }
