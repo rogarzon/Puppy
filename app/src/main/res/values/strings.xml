@@ -24,4 +24,7 @@
     <string name="action_register">Receive Notifications</string>
     <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>
     <string name="fcm_message">FCM Message</string>
+    <string name="action_follow">Follow</string>
+    <string name="action_profile">See profile</string>
+    <string name="action_user">See user</string>
 </resources>
